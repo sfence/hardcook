@@ -1,0 +1,7 @@
+
+# Enable easy mode
+cooking_easy_mode (Enable easy mode) bool false
+
+# Time divider constant
+cooking_time_divider (Time divider constant) int 72 1 10000000
+

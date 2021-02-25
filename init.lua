@@ -3,8 +3,11 @@ cooking = {};
 
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
+cooking.translator = minetest.get_translator("cooking")
+
 cooking.easy_mode = minetest.settings:get_bool("cooking_easy_mode", false)
 cooking.dirty_dishes = minetest.settings:get_bool("cooking_dirty_dishes", false)
+cooking.use_normal_water = minetest.settings:get_bool("cooking_use_normal_water", false)
 cooking.time_divider = tonumber(minetest.settings:get("cooking_time_divider")) or 72
 
 cooking.have_technic = minetest.get_modpath("technic");
@@ -19,6 +22,8 @@ dofile(modpath.."/functions.lua");
 dofile(modpath.."/appliances/appliances.lua");
 
 dofile(modpath.."/dishes/dishes.lua");
+
+dofile(modpath.."/foods/foods.lua");
 
 dofile(modpath.."/recipes/recipes.lua");
 

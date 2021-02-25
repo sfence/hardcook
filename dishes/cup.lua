@@ -58,27 +58,32 @@ local node_box_fill =
     },
   }
 
+local S = cooking.translator;
+
 minetest.register_node( "cooking:cup", {
-  description = "Empty cup",
+  description = S("Empty cup"),
   drawtype = "nodebox",
   paramtype  = "light",
   paramtype2 = "facedir",
   node_box = node_box,
   selection_box = node_box,
+  collision_box = node_box,
   tiles = {"cooking_cup.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2},
 })
 
 minetest.register_node( "cooking:cup_tea", {
-  description = "Empty cup",
+  description = S("Cup of tea"),
+  stack_max = 1,
   drawtype = "nodebox",
   paramtype  = "light",
   paramtype2 = "facedir",
   node_box = node_box_fill,
   selection_box = node_box_fill,
+  collision_box = node_box_fill,
   tiles = {"cooking_cup_tea.png", "cooking_cup.png", "cooking_cup.png", "cooking_cup.png", "cooking_cup.png", "cooking_cup.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2},
 })
 

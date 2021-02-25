@@ -2,6 +2,12 @@
 # Enable easy mode
 cooking_easy_mode (Enable easy mode) bool false
 
+# Enable dirty dishes -> have to be washed
+cooking_dirty_dishes (Enable dirty dishes) bool false
+
+# Enable cooking from normal (salt ocean) water 
+cooking_use_normal_water (Allow use of normal water like river water) bool false
+
 # Time divider constant
 cooking_time_divider (Time divider constant) int 72 1 10000000
 

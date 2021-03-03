@@ -323,13 +323,6 @@ minetest.register_node( "cooking:glass_bottle_cork", {
 
 cooking.set_on_place("vessels:glass_bottle", "cooking:glass_bottle_cork")
 
-minetest.override_item("vessels:glass_bottle", {
-  liquids_pointable = true,
-  on_use = function (itemstack, user, pointed_thing)
-      return to_bottle_with_water(itemstack, user, pointed_thing, "cooking:glass_bottle_cork_with_water");
-    end,
-  });
-
 minetest.register_node( "cooking:glass_bottle_with_water", {
   description = "Open glass bottle with water",
   drawtype = "mesh",

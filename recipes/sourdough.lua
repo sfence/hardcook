@@ -1,22 +1,17 @@
 
 -- sourdough
 
-cooking.add_punch_recipe("cooking:mixing_glass_bowl_with_flour", "cooking:glass_bottle_with_water", {
+cooking.add_punch_recipe("cooking:mixing_glass_bowl_with_flour_rye", "cooking:glass_bottle_with_water", {
     new_name = "cooking:mixing_glass_bowl_with_flour_water",
     drop = "cooking:glass_bottle"
   }, "pouring_mixing_bowl")
 
-cooking.add_punch_recipe("cooking:mixing_glass_bowl_with_flour", "cooking:glass_bottle_cork_with_water", {
-    new_name = "cooking:mixing_glass_bowl_with_flour_water",
-    drop = "vessels:glass_bottle"
-  }, "pouring_mixing_bowl")
-
-cooking.add_punch_recipe("cooking:mixing_glass_bowl_with_flour_water", "cooking:stirring_spoon", {
-    new_name = "cooking:mixing_glass_bowl_with_flour_water_mixed",
+cooking.add_punch_recipe("cooking:mixing_glass_bowl_with_flour_rye_water", "cooking:stirring_spoon", {
+    new_name = "cooking:mixing_glass_bowl_with_flour_rye_water_mixed",
     no_take = true,
   }, "mixing_stirring_spoon")
 
-cooking.add_timer_recipe("cooking:mixing_glass_bowl_with_flour_water_mixed", {
+cooking.add_timer_recipe("cooking:mixing_glass_bowl_with_flour_rye_water_mixed", {
     new_name = "cooking:mixing_glass_bowl_with_sourdough_1_add_fuel",
     use_meta = "waiting",
     target_meta = math.ceil((24*60*60)/cooking.time_divider),
@@ -55,8 +50,13 @@ cooking.add_timer_recipe("cooking:mixing_glass_bowl_with_sourdough_3", {
     target_meta = math.ceil((24*60*60)/cooking.time_divider),
   }, "waiting")
 
+cooking.add_punch_recipe("cooking:mixing_glass_bowl", "cooking:mixing_glass_bowl_with_sourdough", {
+    new_name = "cooking:mixing_glass_bowl_with_sourdough_half",
+    drop = "cooking:mixing_glass_bowl_with_sourdough_half"
+  }, "pouring_mixing_bowl")
+
 cooking.add_punch_recipe("cooking:mixing_glass_bowl_with_sourdough_half", "farming:flour", {
-    new_name = "cooking:mixing_glass_bowl_with_sourdough_3_add_fuel",
+    new_name = "cooking:mixing_glass_bowl_with_sourdough_3",
     drop = "cooking:glass_bottle"
   }, "pouring_mixing_bowl")
 

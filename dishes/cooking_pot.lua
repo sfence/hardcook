@@ -142,30 +142,6 @@ node_box_potlid = {
 
 local S = cooking.translator;
 
-minetest.register_craftitem( "cooking:potlid", {
-  description = S("Potlid"),
-  inventory_image = "cooking_potlid_inv.png",
-  stack_max = 1,
-});
-
-if (cooking.dirty_dishes) then
-  minetest.register_craftitem( "cooking:potlid_dirty", {
-    description = S("Dirty potlid"),
-    inventory_image = "cooking_potlid_inv.png",
-    stack_max = 1,
-  });
-else
-  minetest.register_alias("cooking:potlid_dirty", "cooking:potlid");
-end
-
-minetest.register_craft({
-  output = "cooking:potlid",
-  recipe = {
-    {"group:stick"},
-    {"default:steel_ingot"},
-  },
-});
-
 minetest.register_node( "cooking:cooking_pot", {
   description = S("Cooking pot"),
   drawtype = "mesh",
@@ -195,8 +171,10 @@ if (cooking.dirty_dishes) then
     --sunlight_propagates = true,
     groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
   })
+  minetest.register_alias("cooking:cooking_pot_dirty_node", "cooking:cooking_pot_dirty");
 else
-  minetest.register_alias("cooking:cooking_pot_dirty", "cooking:cooking_pot");
+  minetest.register_alias("cooking:cooking_pot_dirty", "farming:pot");
+  minetest.register_alias("cooking:cooking_pot_dirty_node", "cooking:cooking_pot");
 end
 
 minetest.register_node( "cooking:cooking_pot_with_water", {

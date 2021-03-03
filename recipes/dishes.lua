@@ -20,4 +20,14 @@ cooking.add_punch_recipe("cooking:cutting_board", "cooking:cutting_knife", {
     drop = "farming:cutting_board",
   }, "take_hand")
 
+-- mortar and pestle
+cooking.add_punch_recipe("cooking:mortar_with_pestle", "", {
+    new_name = "cooking:mortar",
+    drop = "cooking:pestle",
+  }, "take_hand")
+
+cooking.add_punch_recipe("cooking:mortar", "cooking:pestle", {
+    new_name = "air",
+    drop = "farming:mortar_pestle",
+  }, "take_hand")
 

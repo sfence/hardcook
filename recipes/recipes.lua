@@ -141,7 +141,11 @@ cooking.recipes_on_punch = function(pos, node, puncher, pointed_thing)
             local inv = puncher:get_inventory();
             local list = puncher:get_wield_list();
             if (inv:room_for_item(list, drop)) then
-              inv:add_item(list, drop);
+              if (wielded_item:get_count()==0) then
+                puncher:set_wielded_item(drop);
+              else
+                inv:add_item(list, drop);
+              end
             else
               minetest.add_item(puncher:get_pos(), drop);
             end
@@ -202,9 +206,11 @@ else
 end
 
 dofile(modpath.."/recipes/dishes.lua");
+
+dofile(modpath.."/recipes/bread.lua");
 dofile(modpath.."/recipes/cutting.lua");
+dofile(modpath.."/recipes/flour.lua");
 dofile(modpath.."/recipes/juices.lua");
 dofile(modpath.."/recipes/sourdough.lua");
-dofile(modpath.."/recipes/bread.lua");
 dofile(modpath.."/recipes/soup.lua");
 

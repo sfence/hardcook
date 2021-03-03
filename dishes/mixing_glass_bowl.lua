@@ -252,26 +252,94 @@ if (cooking.dirty_dishes) then
     --sunlight_propagates = true,
     groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
   })
+  minetest.register_alias("cooking:mixing_glass_bowl_dirty_node", "cooking:mixing_glass_bowl_dirty");
 else
   minetest.register_alias("cooking:mixing_glass_bowl_dirty", "farming:mixing_bowl");
+  minetest.register_alias("cooking:mixing_glass_bowl_dirty_node", "cooking:mixing_glass_bowl");
 end
 
-minetest.register_node( "cooking:mixing_glass_bowl_with_flour", {
-  description = S("Mixing glass bowl with flour"),
-  stack_max = 1,
-  drawtype = "mesh",
-  paramtype  = "light",
-  paramtype2 = "facedir",
-  mesh = "cooking_mixing_glass_bowl_fill_half.obj",
-  selection_box = node_box_bowl_fill_half,
-  collision_box = node_box_bowl_fill_half,
-  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_flour_top.png", "cooking_mixing_glass_bowl_fill_flour_top.png", "cooking_mixing_glass_bowl_fill_flour_side.png"},
-  --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+local grains = {
+  wheat = "Wheat",
+  barley = "Barley",
+  oat = "Oat",
+  rye = "Rye",
+  multigrain = "Multigrain",
+}
+
+for key, value in pairs(grains) do
+  local texture_flour = "cooking_fill_"..key.."_flour.png";
+  minetest.register_node( "cooking:mixing_glass_bowl_with_flour_"..key, {
+    description = S("Mixing glass bowl with "..key.." flour"),
+    stack_max = 1,
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    mesh = "cooking_mixing_glass_bowl_fill_half.obj",
+    selection_box = node_box_bowl_fill_half,
+    collision_box = node_box_bowl_fill_half,
+    tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", texture_flour, texture_flour, texture_flour},
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  })
+
+  minetest.register_node( "cooking:mixing_glass_bowl_with_flour_"..key.."_water", {
+    description = S("Mixing glass bowl with "..key.." flour and water"),
+    stack_max = 1,
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    mesh = "cooking_mixing_glass_bowl_fill.obj",
+    selection_box = node_box_bowl_fill,
+    collision_box = node_box_bowl_fill,
+    tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_top.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_top.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_side.png"},
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  })
+
+  minetest.register_node( "cooking:mixing_glass_bowl_with_flour_"..key.."_water_mixed", {
+    description = S("Mixing glass bowl with mixed "..key.." flour and water"),
+    stack_max = 1,
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    mesh = "cooking_mixing_glass_bowl_fill.obj",
+    selection_box = node_box_bowl_fill,
+    collision_box = node_box_bowl_fill,
+    tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_mixed_top.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_mixed_top.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_mixed_side.png"},
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  })
+  
+  minetest.register_node( "cooking:mixing_glass_bowl_with_flour_"..key.."_salt", {
+    description = S("Mixing glass bowl with "..key.." flour and salt"),
+    stack_max = 1,
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    mesh = "cooking_mixing_glass_bowl_fill_half.obj",
+    selection_box = node_box_bowl_fill_half,
+    collision_box = node_box_bowl_fill_half,
+    tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", texture_flour, texture_flour. texture_flour},
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  })
+
+  minetest.register_node( "cooking:mixing_glass_bowl_with_flour_"..key.."_salt_water", {
+    description = S("Mixing glass bowl with "..key.." flour, salt and water"),
+    stack_max = 1,
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    mesh = "cooking_mixing_glass_bowl_fill.obj",
+    selection_box = node_box_bowl_fill,
+    collision_box = node_box_bowl_fill,
+    tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_top.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_bottom.png", texture_flour.."^cooking_mixing_glass_bowl_fill_water_side.png"},
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
 
-minetest.register_node( "cooking:mixing_glass_bowl_with_flour_water", {
-  description = S("Mixing glass bowl with flour and water"),
+minetest.register_node( "cooking:mixing_glass_bowl_with_flour_"..key.."_salt_water_sourdough", {
+  description = S("Mixing glass bowl with "..key.." flour, salt, water and sourdough"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
@@ -279,24 +347,11 @@ minetest.register_node( "cooking:mixing_glass_bowl_with_flour_water", {
   mesh = "cooking_mixing_glass_bowl_fill.obj",
   selection_box = node_box_bowl_fill,
   collision_box = node_box_bowl_fill,
-  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_flour_water_top.png", "cooking_mixing_glass_bowl_fill_flour_water_top.png", "cooking_mixing_glass_bowl_fill_flour_water_side.png"},
+  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", texture_flour.."^cooking_mixing_glass_bowl_fill_salt_water_sourdough_top.png", texture_flour.."^cooking_mixing_glass_bowl_fill_salt_water_sourdough_bottom.png", texture_flour.."^cooking_mixing_glass_bowl_fill_salt_water_sourdough_side.png"},
   --sunlight_propagates = true,
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
-
-minetest.register_node( "cooking:mixing_glass_bowl_with_flour_water_mixed", {
-  description = S("Mixing glass bowl with mixed flour and water"),
-  stack_max = 1,
-  drawtype = "mesh",
-  paramtype  = "light",
-  paramtype2 = "facedir",
-  mesh = "cooking_mixing_glass_bowl_fill.obj",
-  selection_box = node_box_bowl_fill,
-  collision_box = node_box_bowl_fill,
-  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_flour_water_mixed_top.png", "cooking_mixing_glass_bowl_fill_flour_water_mixed_top.png", "cooking_mixing_glass_bowl_fill_flour_water_mixed_side.png"},
-  --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
-})
+end
 
 for i=1,3 do
   minetest.register_node( "cooking:mixing_glass_bowl_with_sourdough_"..tostring(i), {
@@ -354,48 +409,6 @@ minetest.register_node( "cooking:mixing_glass_bowl_with_sourdough", {
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
 
-minetest.register_node( "cooking:mixing_glass_bowl_with_flour_salt", {
-  description = S("Mixing glass bowl with flour and salt"),
-  stack_max = 1,
-  drawtype = "mesh",
-  paramtype  = "light",
-  paramtype2 = "facedir",
-  mesh = "cooking_mixing_glass_bowl_fill_half.obj",
-  selection_box = node_box_bowl_fill_half,
-  collision_box = node_box_bowl_fill_half,
-  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_flour_top.png", "cooking_mixing_glass_bowl_fill_flour_top.png", "cooking_mixing_glass_bowl_fill_flour_side.png"},
-  --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
-})
-
-minetest.register_node( "cooking:mixing_glass_bowl_with_flour_salt_water", {
-  description = S("Mixing glass bowl with flour, salt and water"),
-  stack_max = 1,
-  drawtype = "mesh",
-  paramtype  = "light",
-  paramtype2 = "facedir",
-  mesh = "cooking_mixing_glass_bowl_fill.obj",
-  selection_box = node_box_bowl_fill,
-  collision_box = node_box_bowl_fill,
-  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_flour_water_top.png", "cooking_mixing_glass_bowl_fill_flour_water_bottom.png", "cooking_mixing_glass_bowl_fill_flour_water_side.png"},
-  --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
-})
-
-minetest.register_node( "cooking:mixing_glass_bowl_with_flour_salt_water_sourdough", {
-  description = S("Mixing glass bowl with flour, salt, water and sourdough"),
-  stack_max = 1,
-  drawtype = "mesh",
-  paramtype  = "light",
-  paramtype2 = "facedir",
-  mesh = "cooking_mixing_glass_bowl_fill.obj",
-  selection_box = node_box_bowl_fill,
-  collision_box = node_box_bowl_fill,
-  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_flour_salt_water_sourdough_top.png", "cooking_mixing_glass_bowl_fill_flour_salt_water_sourdough_bottom.png", "cooking_mixing_glass_bowl_fill_flour_salt_water_sourdough_side.png"},
-  --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
-})
-
 minetest.register_node( "cooking:mixing_glass_bowl_with_bread_dough", {
   description = S("Mixing glass bowl with dough bread"),
   stack_max = 1,
@@ -438,3 +451,44 @@ minetest.register_node( "cooking:mixing_glass_bowl_with_bread_dough_leavened", {
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
 
+minetest.register_node( "cooking:mixing_glass_bowl_with_multigrain_bread_dough", {
+  description = S("Mixing glass bowl with dough multigrain_bread"),
+  stack_max = 1,
+  drawtype = "mesh",
+  paramtype  = "light",
+  paramtype2 = "facedir",
+  mesh = "cooking_mixing_glass_bowl_fill_half.obj",
+  selection_box = node_box_bowl_fill_half,
+  collision_box = node_box_bowl_fill_half,
+  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_top.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_top.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_side.png"},
+  --sunlight_propagates = true,
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+})
+
+minetest.register_node( "cooking:mixing_glass_bowl_with_multigrain_bread_dough_kneaded", {
+  description = S("Mixing glass bowl with kneaded multigrain_bread dough"),
+  stack_max = 1,
+  drawtype = "mesh",
+  paramtype  = "light",
+  paramtype2 = "facedir",
+  mesh = "cooking_mixing_glass_bowl_fill_half.obj",
+  selection_box = node_box_bowl_fill_half,
+  collision_box = node_box_bowl_fill_half,
+  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_kneaded_top.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_kneaded_top.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_kneaded_side.png"},
+  --sunlight_propagates = true,
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+})
+
+minetest.register_node( "cooking:mixing_glass_bowl_with_multigrain_bread_dough_leavened", {
+  description = S("Mixing glass bowl with leavened multigrain_bread dough"),
+  stack_max = 1,
+  drawtype = "mesh",
+  paramtype  = "light",
+  paramtype2 = "facedir",
+  mesh = "cooking_mixing_glass_bowl_fill.obj",
+  selection_box = node_box_bowl_fill,
+  collision_box = node_box_bowl_fill,
+  tiles = {"cooking_mixing_glass_bowl_top.png", "cooking_mixing_glass_bowl_bottom.png", "cooking_mixing_glass_bowl_side.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_kneaded_top.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_kneaded_top.png", "cooking_mixing_glass_bowl_fill_multigrain_bread_dough_kneaded_side.png"},
+  --sunlight_propagates = true,
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+})

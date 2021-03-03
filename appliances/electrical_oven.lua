@@ -141,7 +141,7 @@ if cooking.easy_mode then
     
     if (oven_temp_set>1) then
       local oven_temp = oven_temps[oven_temp_set];
-      local percents = math.floor(((oven_temp-temp_oven_min)/(temp_oven_max-temp_oven_min)))
+      local percents = ((oven_temp-temp_oven_min)/(temp_oven_max-temp_oven_min))
       demand = demand + percents*500;
     end
     
@@ -184,13 +184,39 @@ if cooking.easy_mode then
       oven_temp = oven_temp,
     };
     
-    cooking.recipes_on_baking(inv:get_stack(self.output_stack, 1), meta, baking_data);
-    cooking.recipes_on_baking(inv:get_stack(self.output_stack, 2), meta, baking_data);
+    --minetest.log("warning", "baking")
+    baking_data.meta_prefix = "oven1_";
+    local stack = inv:get_stack(self.output_stack, 1);
+    cooking.recipes_on_baking(stack, meta, baking_data);
+    inv:set_stack(self.output_stack, 1, stack);
+    baking_data.meta_prefix = "oven2_";
+    local stack = inv:get_stack(self.output_stack, 2);
+    cooking.recipes_on_baking(stack, meta, baking_data);
+    inv:set_stack(self.output_stack, 2, stack);
     
     return true;
   end
 else
   minetest.log("warning", "TODO:")
+end
+
+function electrical_oven:cb_allow_metadata_inventory_put(pos, listname, index, stack, player)
+  local item_def = stack:get_definition();
+  if item_def then
+    if (item_def._cooking) and (item_def._cooking.baking_recipe) then
+      local meta = minetest.get_meta(pos);
+      local inv = meta:get_inventory();
+      local have = inv:get_stack(listname, index);
+      if (have:get_name()~=stack:get_name()) then
+        return 1;
+      end
+    end
+  end
+  return 0;
+end
+
+function electrical_oven:cb_allow_metadata_inventory_take(pos, listname, index, stack, player)
+  return stack:get_count();
 end
 
 ----------

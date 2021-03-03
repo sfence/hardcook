@@ -138,20 +138,6 @@ node_box_potlid = {
 
 local S = cooking.translator;
 
-minetest.register_craftitem( "cooking:potlid", {
-  description = S("Potlid"),
-  inventory_image = "cooking_potlid_inv.png",
-  stack_max = 1,
-});
-
-minetest.register_craft({
-  output = "cooking:potlid",
-  recipe = {
-    {"group:stick"},
-    {"default:steel_ingot"},
-  },
-});
-
 minetest.register_node( "cooking:saucepan", {
   description = S("Saucepan"),
   drawtype = "mesh",
@@ -167,6 +153,25 @@ minetest.register_node( "cooking:saucepan", {
 })
 
 cooking.set_on_place("farming:saucepan", "cooking:saucepan")
+
+if (cooking.dirty_dishes) then
+  minetest.register_node( "cooking:saucepan_dirty", {
+    description = S("Dirty saucepan"),
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    mesh = "cooking_saucepan.obj",
+    selection_box = node_box_saucepan,
+    collision_box = node_box_saucepan,
+    tiles = {"cooking_saucepan_top.png", "cooking_saucepan_bottom.png", "cooking_saucepan_side.png"},
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  })
+  minetest.register_alias("cooking:saucepan_dirty_node", "cooking:saucepan_dirty");
+else
+  minetest.register_alias("cooking:saucepan_dirty", "farming:saucepan");
+  minetest.register_alias("cooking:saucepan_dirty_node", "cooking:saucepan");
+end
 
 minetest.register_node( "cooking:saucepan_potlid", {
   description = S("Saucepan with potlid"),
@@ -193,6 +198,5 @@ minetest.register_node( "cooking:saucepan_with_", {
   tiles = {"cooking_saucepan_top.png", "cooking_saucepan_bottom.png", "cooking_saucepan_side.png"},
   --sunlight_propagates = true,
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
-  drop = "farming:saucepan",
 })
 

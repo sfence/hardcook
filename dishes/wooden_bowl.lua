@@ -98,8 +98,10 @@ if (cooking.dirty_dishes) then
     --sunlight_propagates = true,
     groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
   })
+  minetest.register_alias("cooking:wooden_bowl_dirty_node", "cooking:wooden_bowl_dirty");
 else
   minetest.register_alias("cooking:wooden_bowl_dirty", "farming:bowl");
+  minetest.register_alias("cooking:wooden_bowl_dirty_node", "cooking:wooden_bowl");
 end
 
 minetest.register_node( "cooking:wooden_bowl_with_beetroot_soup", {

@@ -173,8 +173,10 @@ if (cooking.dirty_dishes) then
     --sunlight_propagates = true,
     groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
   })
+  minetest.register_alias("cooking:juicer_dirty_node", "cooking:juicer_dirty");
 else
   minetest.register_alias("cooking:juicer_dirty", "farming:juicer");
+  minetest.register_alias("cooking:juicer_dirty_node", "cooking:juicer");
 end
 
 -- cactus juice

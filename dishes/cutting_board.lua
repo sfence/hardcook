@@ -127,15 +127,17 @@ node_box_board_with_onion = {
   },
 }
 
+local S = cooking.translator;
+
 minetest.register_craftitem( "cooking:cutting_knife", {
-  description = "Cutting knife",
+  description = S("Cutting knife"),
   inventory_image = "cooking_cutting_knife_inv.png",
   wield_image = "cooking_cutting_knife_inv.png^[transformFY",
   stack_max = 1,
 });
 
 minetest.register_node( "cooking:cutting_board_with_knife", {
-  description = "Cutting board with knife",
+  description = S("Cutting board with knife"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
@@ -151,7 +153,7 @@ minetest.register_node( "cooking:cutting_board_with_knife", {
 cooking.set_on_place("farming:cutting_board", "cooking:cutting_board_with_knife")
 
 minetest.register_node( "cooking:cutting_board", {
-  description = "Cutting board",
+  description = S("Cutting board"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
@@ -165,13 +167,13 @@ minetest.register_node( "cooking:cutting_board", {
 
 if (cooking.have_unified) then
   unified_inventory.register_craft_type("place_cutting_board", {
-      description = "place";
+      description = S("place");
       icon = "farming_cutting_board.png",
       width = 2,
       height = 1,
     })
   unified_inventory.register_craft_type("cutting_board", {
-      description = "cutting";
+      description = S("cutting");
       icon = "farming_cutting_board.png",
       width = 2,
       height = 1,
@@ -179,8 +181,14 @@ if (cooking.have_unified) then
 end
 
 if (cooking.dirty_dishes) then
+  minetest.register_craftitem( "cooking:cutting_knife_dirty", {
+    description = S("Dirty cutting knife"),
+    inventory_image = "cooking_cutting_knife_dirty_inv.png",
+    wield_image = "cooking_cutting_knife_dirty_inv.png^[transformFY",
+    stack_max = 1,
+  });
   minetest.register_node( "cooking:cutting_board_dirty", {
-    description = "Dirty cutting board",
+    description = S("Dirty cutting board"),
     drawtype = "mesh",
     paramtype  = "light",
     paramtype2 = "facedir",
@@ -193,11 +201,13 @@ if (cooking.dirty_dishes) then
   })
 else
   minetest.register_alias("cooking:cutting_board_dirty", "cooking:cutting_board");
+  minetest.register_alias("cooking:cutting_knife_dirty", "cooking:cutting_knife");
 end
+minetest.register_alias("cooking:cutting_board_dirty_node", "cooking:cutting_board");
 
 -- apple
 minetest.register_node( "cooking:cutting_board_with_apple", {
-  description = "Cutting board with apple",
+  description = S("Cutting board with apple"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
@@ -210,7 +220,7 @@ minetest.register_node( "cooking:cutting_board_with_apple", {
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
 minetest.register_node( "cooking:cutting_board_with_chopped_apple", {
-  description = "Cutting board with chopped apple",
+  description = S("Cutting board with chopped apple"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
@@ -225,7 +235,7 @@ minetest.register_node( "cooking:cutting_board_with_chopped_apple", {
 
 -- beetroot
 minetest.register_node( "cooking:cutting_board_with_beetroot", {
-  description = "Cutting board with beetroot",
+  description = S("Cutting board with beetroot"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
@@ -238,7 +248,7 @@ minetest.register_node( "cooking:cutting_board_with_beetroot", {
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
 minetest.register_node( "cooking:cutting_board_with_chopped_beetroot", {
-  description = "Cutting board with chopped beetroot",
+  description = S("Cutting board with chopped beetroot"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
@@ -253,7 +263,7 @@ minetest.register_node( "cooking:cutting_board_with_chopped_beetroot", {
 
 -- onion
 minetest.register_node( "cooking:cutting_board_with_onion", {
-  description = "Cutting board with onion",
+  description = S("Cutting board with onion"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
@@ -266,7 +276,7 @@ minetest.register_node( "cooking:cutting_board_with_onion", {
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
 })
 minetest.register_node( "cooking:cutting_board_with_chopped_onion", {
-  description = "Cutting board with chopped onion",
+  description = S("Cutting board with chopped onion"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",

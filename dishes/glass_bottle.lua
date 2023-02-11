@@ -243,7 +243,7 @@ local water_nodes = {
   ["default:river_water_flowing"] = true,
 };
 
-if cooking.use_normal_water then
+if hardcook.use_normal_water then
   water_nodes["default:water_source"] = true;
   water_nodes["default:water_flowing"] = true;
 end
@@ -259,7 +259,7 @@ local function to_bottle_with_water(itemstack, user, pointed_thing, target_bottl
   local node = minetest.get_node(pointed_thing.under);
   local is_water = water_nodes[node.name];
   if is_water then
-    cooking.item_to_inventory(user, ItemStack(target_bottle));
+    hardcook.item_to_inventory(user, ItemStack(target_bottle));
     itemstack:take_item(1);
     return itemstack;
   else
@@ -272,29 +272,30 @@ local function to_bottle_with_water(itemstack, user, pointed_thing, target_bottl
   end
 end
 
-minetest.register_craftitem( "cooking:bottle_cork", {
+minetest.register_craftitem( "hardcook:bottle_cork", {
   description = "Cork for bottle",
-  inventory_image = "cooking_bottle_cork_inv.png",
+  inventory_image = "hardcook_bottle_cork_inv.png",
 });
 
-minetest.register_node( "cooking:glass_bottle", {
+minetest.register_node( "hardcook:glass_bottle", {
   description = "Empty open glass bottle",
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_glass_bottle.obj",
+  mesh = "hardcook_glass_bottle.obj",
   selection_box = node_box_bottle,
   collision_box = node_box_bottle,
-  tiles = {"cooking_glass_bottle_top.png", "cooking_glass_bottle_bottom.png", "cooking_glass_bottle_side.png"},
+  tiles = {"hardcook_glass_bottle_top.png", "hardcook_glass_bottle_bottom.png", "hardcook_glass_bottle_side.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
   liquids_pointable = true,
   on_use = function (itemstack, user, pointed_thing)
-      return to_bottle_with_water(itemstack, user, pointed_thing, "cooking:glass_bottle_with_water");
+      return to_bottle_with_water(itemstack, user, pointed_thing, "hardcook:glass_bottle_with_water");
     end,
 })
 
-if (cooking.have_unified) then
+if (hardcook.have_unified) then
   unified_inventory.register_craft_type("pouring_glass_bottle", {
       description = "pouring";
       icon = "vessels_glass_bottle_inv.png",
@@ -303,51 +304,54 @@ if (cooking.have_unified) then
     })
 end
 
-minetest.register_node( "cooking:glass_bottle_cork", {
+minetest.register_node( "hardcook:glass_bottle_cork", {
   description = "Empty close glass bottle",
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_glass_bottle_cork.obj",
+  mesh = "hardcook_glass_bottle_cork.obj",
   selection_box = node_box_cork,
   collision_box = node_box_cork,
-  tiles = {"cooking_glass_bottle_top.png", "cooking_glass_bottle_bottom.png", "cooking_glass_bottle_side.png", "cooking_glass_bottle_cork.png"},
+  tiles = {"hardcook_glass_bottle_top.png", "hardcook_glass_bottle_bottom.png", "hardcook_glass_bottle_side.png", "hardcook_glass_bottle_cork.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
   drop = "vessels:glass_bottle",
   liquids_pointable = true,
   on_use = function (itemstack, user, pointed_thing)
-      return to_bottle_with_water(itemstack, user, pointed_thing, "cooking:glass_bottle_cork_with_water");
+      return to_bottle_with_water(itemstack, user, pointed_thing, "hardcook:glass_bottle_cork_with_water");
     end,
 })
 
-cooking.set_on_place("vessels:glass_bottle", "cooking:glass_bottle_cork")
+hardcook.set_on_place("vessels:glass_bottle", "hardcook:glass_bottle_cork")
 
-minetest.register_node( "cooking:glass_bottle_with_water", {
+minetest.register_node( "hardcook:glass_bottle_with_water", {
   description = "Open glass bottle with water",
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_glass_bottle_fill.obj",
+  mesh = "hardcook_glass_bottle_fill.obj",
   selection_box = node_box_fill,
   collision_box = node_box_fill,
-  tiles = {"cooking_glass_bottle_top.png", "cooking_glass_bottle_bottom.png", "cooking_glass_bottle_side.png", "default_river_water.png"},
+  tiles = {"hardcook_glass_bottle_top.png", "hardcook_glass_bottle_bottom.png", "hardcook_glass_bottle_side.png", "default_river_water.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
   drop = "vessels:glass_bottle",
 })
 
-minetest.register_node( "cooking:glass_bottle_cork_with_water", {
+minetest.register_node( "hardcook:glass_bottle_cork_with_water", {
   description = "Close glass bottle with water",
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_glass_bottle_fill_cork.obj",
+  mesh = "hardcook_glass_bottle_fill_cork.obj",
   selection_box = node_box_cork,
   collision_box = node_box_cork,
-  tiles = {"cooking_glass_bottle_top.png", "cooking_glass_bottle_bottom.png", "cooking_glass_bottle_side.png", "default_water.png", "cooking_glass_bottle_cork.png"},
+  tiles = {"hardcook_glass_bottle_top.png", "hardcook_glass_bottle_bottom.png", "hardcook_glass_bottle_side.png", "default_water.png", "hardcook_glass_bottle_cork.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
   drop = "vessels:glass_bottle",
 })
 

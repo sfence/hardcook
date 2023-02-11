@@ -136,67 +136,94 @@ node_box_potlid = {
   },
 }
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
-minetest.register_node( "cooking:saucepan", {
+minetest.register_node( "hardcook:saucepan", {
   description = S("Saucepan"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_saucepan.obj",
+  mesh = "hardcook_saucepan.obj",
   selection_box = node_box_saucepan,
   collision_box = node_box_saucepan,
-  tiles = {"cooking_saucepan_top.png", "cooking_saucepan_bottom.png", "cooking_saucepan_side.png"},
+  tiles = {"hardcook_saucepan_top.png", "hardcook_saucepan_bottom.png", "hardcook_saucepan_side.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
   drop = "farming:saucepan",
 })
 
-cooking.set_on_place("farming:saucepan", "cooking:saucepan")
+hardcook.set_on_place("farming:saucepan", "hardcook:saucepan")
 
-if (cooking.dirty_dishes) then
-  minetest.register_node( "cooking:saucepan_dirty", {
+if (hardcook.dirty_dishes) then
+  minetest.register_node( "hardcook:saucepan_dirty", {
     description = S("Dirty saucepan"),
     drawtype = "mesh",
     paramtype  = "light",
     paramtype2 = "facedir",
-    mesh = "cooking_saucepan.obj",
+    mesh = "hardcook_saucepan.obj",
     selection_box = node_box_saucepan,
     collision_box = node_box_saucepan,
-    tiles = {"cooking_saucepan_top.png", "cooking_saucepan_bottom.png", "cooking_saucepan_side.png"},
+    tiles = {"hardcook_saucepan_top.png", "hardcook_saucepan_bottom.png", "hardcook_saucepan_side.png"},
+    use_texture_alpha = "clip",
     --sunlight_propagates = true,
-    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
   })
-  minetest.register_alias("cooking:saucepan_dirty_node", "cooking:saucepan_dirty");
+  minetest.register_alias("hardcook:saucepan_dirty_node", "hardcook:saucepan_dirty");
 else
-  minetest.register_alias("cooking:saucepan_dirty", "farming:saucepan");
-  minetest.register_alias("cooking:saucepan_dirty_node", "cooking:saucepan");
+  minetest.register_alias("hardcook:saucepan_dirty", "farming:saucepan");
+  minetest.register_alias("hardcook:saucepan_dirty_node", "hardcook:saucepan");
 end
 
-minetest.register_node( "cooking:saucepan_potlid", {
+-- burnt 
+local burnt_def = {
+    name = "saucepan",
+    desc = "saucepan",
+    mesh_potlid = "hardcook_saucepan_potlid.obj",
+    mesh_fill_half = "hardcook_saucepan_fill_half.obj",
+    mesh_fill = "hardcook_saucepan_fill.obj",
+    node_box_potlid = node_box_potlid,
+    node_box_fill_half = node_box_fill_half,
+    node_box_fill = node_box_fill,
+    have_potlid = true,
+  }
+hardcook.help_register_dishes_burnt(burnt_def, {
+    drawtype = "mesh",
+    paramtype  = "light",
+    paramtype2 = "facedir",
+    tiles = {"hardcook_saucepan_dirty_top.png", "hardcook_saucepan_dirty_bottom.png", "hardcook_saucepan_dirty_side.png"},
+    use_texture_alpha = "clip",
+    --sunlight_propagates = true,
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
+  })
+
+--
+minetest.register_node( "hardcook:saucepan_potlid", {
   description = S("Saucepan with potlid"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_saucepan_potlid.obj",
+  mesh = "hardcook_saucepan_potlid.obj",
   selection_box = node_box_potlid,
   collision_box = node_box_potlid,
-  tiles = {"cooking_saucepan_top.png", "cooking_saucepan_bottom.png", "cooking_saucepan_side.png", "cooking_saucepan_potlid_top.png", "cooking_saucepan_potlid_bottom.png", "cooking_saucepan_potlid_side.png"},
+  tiles = {"hardcook_saucepan_top.png", "hardcook_saucepan_bottom.png", "hardcook_saucepan_side.png", "hardcook_saucepan_potlid_top.png", "hardcook_saucepan_potlid_bottom.png", "hardcook_saucepan_potlid_side.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
 })
 
-minetest.register_node( "cooking:saucepan_with_", {
+minetest.register_node( "hardcook:saucepan_with_", {
   description = S("Saucepan"),
   stack_max = 1,
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_saucepan.obj",
+  mesh = "hardcook_saucepan.obj",
   selection_box = node_box_saucepan,
   collision_box = node_box_saucepan,
-  tiles = {"cooking_saucepan_top.png", "cooking_saucepan_bottom.png", "cooking_saucepan_side.png"},
+  tiles = {"hardcook_saucepan_top.png", "hardcook_saucepan_bottom.png", "hardcook_saucepan_side.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
 })
 

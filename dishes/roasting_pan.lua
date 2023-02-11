@@ -147,37 +147,39 @@ node_box_gridiron_fill = {
   },
 }
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
-minetest.register_node( "cooking:roasting_pan", {
+minetest.register_node( "hardcook:roasting_pan", {
   description = S("Roasting pan"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_roasting_pan.obj",
+  mesh = "hardcook_roasting_pan.obj",
   selection_box = node_box_roasting_pan,
   collision_box = node_box_roasting_pan,
-  tiles = {"cooking_roasting_pan_top.png", "cooking_roasting_pan_bottom.png", "cooking_roasting_pan_side.png"},
+  tiles = {"hardcook_roasting_pan_top.png", "hardcook_roasting_pan_bottom.png", "hardcook_roasting_pan_side.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
 })
 
-if (cooking.dirty_dishes) then
-  minetest.register_node( "cooking:roasting_pan_dirty", {
+if (hardcook.dirty_dishes) then
+  minetest.register_node( "hardcook:roasting_pan_dirty", {
     description = S("Dirty roasting pan"),
     drawtype = "mesh",
     paramtype  = "light",
     paramtype2 = "facedir",
-    mesh = "cooking_roasting_pan.obj",
+    mesh = "hardcook_roasting_pan.obj",
     selection_box = node_box_roasting_pan,
     collision_box = node_box_roasting_pan,
-    tiles = {"cooking_roasting_pan_top.png", "cooking_roasting_pan_bottom.png", "cooking_roasting_pan_side.png"},
+    tiles = {"hardcook_roasting_pan_top.png", "hardcook_roasting_pan_bottom.png", "hardcook_roasting_pan_side.png"},
+    use_texture_alpha = "clip",
     --sunlight_propagates = true,
-    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
   })
-  minetest.register_alias("cooking:roasting_pan_dirty_node", "cooking:roasting_pan_dirty");
+  minetest.register_alias("hardcook:roasting_pan_dirty_node", "hardcook:roasting_pan_dirty");
 else
-  minetest.register_alias("cooking:roasting_pan_dirty", "farming:roasting_pan");
-  minetest.register_alias("cooking:roasting_pan_dirty_node", "cooking:roasting_pan");
+  minetest.register_alias("hardcook:roasting_pan_dirty", "farming:roasting_pan");
+  minetest.register_alias("hardcook:roasting_pan_dirty_node", "hardcook:roasting_pan");
 end
 

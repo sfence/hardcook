@@ -48,40 +48,42 @@ node_box_fill = {
 }
 
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
-minetest.register_node( "cooking:baking_tray", {
+minetest.register_node( "hardcook:baking_tray", {
   description = S("Baking tray"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_baking_tray.obj",
+  mesh = "hardcook_baking_tray.obj",
   selection_box = node_box_baking_tray,
   collision_box = node_box_baking_tray,
-  tiles = {"cooking_baking_tray_top.png", "cooking_baking_tray_bottom.png"},
+  tiles = {"hardcook_baking_tray_top.png", "hardcook_baking_tray_bottom.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
   drop = "farming:baking_tray",
 })
 
-cooking.set_on_place("farming:baking_tray", "cooking:baking_tray")
+hardcook.set_on_place("farming:baking_tray", "hardcook:baking_tray")
 
-if (cooking.dirty_dishes) then
-  minetest.register_node( "cooking:baking_tray_dirty", {
+if (hardcook.dirty_dishes) then
+  minetest.register_node( "hardcook:baking_tray_dirty", {
     description = S("Dirty baking tray"),
     drawtype = "mesh",
     paramtype  = "light",
     paramtype2 = "facedir",
-    mesh = "cooking_baking_tray.obj",
+    mesh = "hardcook_baking_tray.obj",
     selection_box = node_box_baking_tray,
     collision_box = node_box_baking_tray,
-    tiles = {"cooking_baking_tray_top.png", "cooking_baking_tray_bottom.png"},
+    tiles = {"hardcook_baking_tray_top.png", "hardcook_baking_tray_bottom.png"},
+    use_texture_alpha = "clip",
     --sunlight_propagates = true,
-    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
   })
-  minetest.register_alias("cooking:baking_tray_dirty_node", "cooking:baking_tray_dirty");
+  minetest.register_alias("hardcook:baking_tray_dirty_node", "hardcook:baking_tray_dirty");
 else
-  minetest.register_alias("cooking:baking_tray_dirty", "farming:baking_tray");
-  minetest.register_alias("cooking:baking_tray_dirty_node", "cooking:baking_tray");
+  minetest.register_alias("hardcook:baking_tray_dirty", "farming:baking_tray");
+  minetest.register_alias("hardcook:baking_tray_dirty_node", "hardcook:baking_tray");
 end
 

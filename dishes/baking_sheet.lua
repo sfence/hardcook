@@ -45,37 +45,39 @@ node_box_fill = {
   },
 }
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
-minetest.register_node( "cooking:baking_sheet", {
+minetest.register_node( "hardcook:baking_sheet", {
   description = S("Baking sheet"),
   drawtype = "mesh",
   paramtype  = "light",
   paramtype2 = "facedir",
-  mesh = "cooking_baking_sheet.obj",
+  mesh = "hardcook_baking_sheet.obj",
   selection_box = node_box_baking_sheet,
   collision_box = node_box_baking_sheet,
-  tiles = {"cooking_baking_sheet_top.png", "cooking_baking_sheet_bottom.png"},
+  tiles = {"hardcook_baking_sheet_top.png", "hardcook_baking_sheet_bottom.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
 })
 
-if (cooking.dirty_dishes) then
-  minetest.register_node( "cooking:baking_sheet_dirty", {
+if (hardcook.dirty_dishes) then
+  minetest.register_node( "hardcook:baking_sheet_dirty", {
     description = S("Dirty baking sheet"),
     drawtype = "mesh",
     paramtype  = "light",
     paramtype2 = "facedir",
-    mesh = "cooking_baking_sheet.obj",
+    mesh = "hardcook_baking_sheet.obj",
     selection_box = node_box_baking_sheet,
     collision_box = node_box_baking_sheet,
-    tiles = {"cooking_baking_sheet_top.png", "cooking_baking_sheet_bottom.png"},
+    tiles = {"hardcook_baking_sheet_top.png", "hardcook_baking_sheet_bottom.png"},
+    use_texture_alpha = "clip",
     --sunlight_propagates = true,
-    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory, on_burner_top = 1},
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory, on_burner_top = 1},
   })
-  minetest.register_alias("cooking:baking_sheet_dirty_node", "cooking:baking_sheet_dirty");
+  minetest.register_alias("hardcook:baking_sheet_dirty_node", "hardcook:baking_sheet_dirty");
 else
-  minetest.register_alias("cooking:baking_sheet_dirty", "farming:baking_sheet");
-  minetest.register_alias("cooking:baking_sheet_dirty_node", "cooking:baking_sheet");
+  minetest.register_alias("hardcook:baking_sheet_dirty", "farming:baking_sheet");
+  minetest.register_alias("hardcook:baking_sheet_dirty_node", "hardcook:baking_sheet");
 end
 

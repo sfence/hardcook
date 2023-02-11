@@ -135,7 +135,7 @@ node_box_full = {
   },
 }
 
-minetest.register_node( "cooking:juicer", {
+minetest.register_node( "hardcook:juicer", {
   description = "Empty juicer",
   drawtype = "nodebox",
   paramtype  = "light",
@@ -145,13 +145,13 @@ minetest.register_node( "cooking:juicer", {
   collision_box = node_box,
   tiles = {"default_stone.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
   drop = "farming:juicer",
 })
 
-cooking.set_on_place("farming:juicer", "cooking:juicer")
+hardcook.set_on_place("farming:juicer", "hardcook:juicer")
 
-if (cooking.have_unified) then
+if (hardcook.have_unified) then
   unified_inventory.register_craft_type("squeezing", {
       description = "squeezing";
       icon = "farming_juicer.png",
@@ -160,8 +160,8 @@ if (cooking.have_unified) then
     })
 end
 
-if (cooking.dirty_dishes) then
-  minetest.register_node( "cooking:juicer_dirty", {
+if (hardcook.dirty_dishes) then
+  minetest.register_node( "hardcook:juicer_dirty", {
     description = "Dirty juicer",
     drawtype = "nodebox",
     paramtype  = "light",
@@ -169,19 +169,19 @@ if (cooking.dirty_dishes) then
     node_box = node_box,
     selection_box = node_box,
     collision_box = node_box,
-    tiles = {"default_stone.png^cooking_juicer_dirty.png"},
+    tiles = {"default_stone.png^hardcook_juicer_dirty.png"},
     --sunlight_propagates = true,
-    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+    groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
   })
-  minetest.register_alias("cooking:juicer_dirty_node", "cooking:juicer_dirty");
+  minetest.register_alias("hardcook:juicer_dirty_node", "hardcook:juicer_dirty");
 else
-  minetest.register_alias("cooking:juicer_dirty", "farming:juicer");
-  minetest.register_alias("cooking:juicer_dirty_node", "cooking:juicer");
+  minetest.register_alias("hardcook:juicer_dirty", "farming:juicer");
+  minetest.register_alias("hardcook:juicer_dirty_node", "hardcook:juicer");
 end
 
 -- cactus juice
 
-minetest.register_node( "cooking:juicer_with_cactus_juice", {
+minetest.register_node( "hardcook:juicer_with_cactus_juice", {
   description = "Juicer with cactus juice",
   stack_max = 1,
   drawtype = "nodebox",
@@ -190,12 +190,12 @@ minetest.register_node( "cooking:juicer_with_cactus_juice", {
   node_box = node_box_full,
   selection_box = node_box_full,
   collision_box = node_box_full,
-  tiles = {"default_stone.png^cooking_juicer_cactus.png", "default_stone.png"},
+  tiles = {"default_stone.png^hardcook_juicer_cactus.png", "default_stone.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
 })
 
-minetest.register_node( "cooking:juicer_with_cactus_juice_2", {
+minetest.register_node( "hardcook:juicer_with_cactus_juice_2", {
   description = "Juicer with cactus juice",
   stack_max = 1,
   drawtype = "nodebox",
@@ -204,14 +204,14 @@ minetest.register_node( "cooking:juicer_with_cactus_juice_2", {
   node_box = node_box_full,
   selection_box = node_box_full,
   collision_box = node_box_full,
-  tiles = {"default_stone.png^cooking_juicer_cactus.png", "default_stone.png"},
+  tiles = {"default_stone.png^hardcook_juicer_cactus.png", "default_stone.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
 })
 
 -- carrot juice
 
-minetest.register_node( "cooking:juicer_with_carrot_juice", {
+minetest.register_node( "hardcook:juicer_with_carrot_juice", {
   description = "Juicer with carrot juice",
   stack_max = 1,
   drawtype = "nodebox",
@@ -220,14 +220,14 @@ minetest.register_node( "cooking:juicer_with_carrot_juice", {
   node_box = node_box_full,
   selection_box = node_box_full,
   collision_box = node_box_full,
-  tiles = {"default_stone.png^cooking_juicer_carrot.png", "default_stone.png"},
+  tiles = {"default_stone.png^hardcook_juicer_carrot.png", "default_stone.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
 })
 
 -- pineapple juice
 
-minetest.register_node( "cooking:juicer_with_pineapple_juice", {
+minetest.register_node( "hardcook:juicer_with_pineapple_juice", {
   description = "Juicer with pineapple juice",
   stack_max = 1,
   drawtype = "nodebox",
@@ -236,12 +236,12 @@ minetest.register_node( "cooking:juicer_with_pineapple_juice", {
   node_box = node_box_full,
   selection_box = node_box_full,
   collision_box = node_box_full,
-  tiles = {"default_stone.png^cooking_juicer_pineapple.png", "default_stone.png"},
+  tiles = {"default_stone.png^hardcook_juicer_pineapple.png", "default_stone.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
 })
 
-minetest.register_node( "cooking:juicer_with_pineapple_juice_2", {
+minetest.register_node( "hardcook:juicer_with_pineapple_juice_2", {
   description = "Juicer with pineapple juice",
   stack_max = 1,
   drawtype = "nodebox",
@@ -250,9 +250,9 @@ minetest.register_node( "cooking:juicer_with_pineapple_juice_2", {
   node_box = node_box_full,
   selection_box = node_box_full,
   collision_box = node_box_full,
-  tiles = {"default_stone.png^cooking_juicer_pineapple.png", "default_stone.png"},
+  tiles = {"default_stone.png^hardcook_juicer_pineapple.png", "default_stone.png"},
   --sunlight_propagates = true,
-  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = cooking.use_not_in_creative_inventory},
+  groups = {oddly_breakable_by_hand = 1, dig_immediate = 2, not_in_creative_inventory = hardcook.use_not_in_creative_inventory},
 })
 
 

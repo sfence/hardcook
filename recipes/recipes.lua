@@ -2,7 +2,7 @@
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
 --
--- use _cooking[item] = {}
+-- use _hardcook[item] = {}
 --
 -- punch_recipe:
 --   new_name    -> new name of punched node,
@@ -18,11 +18,14 @@ local modpath = minetest.get_modpath(minetest.get_current_modname())
 --   use_meta    -> name of meta,
 --   target_meta -> target meta value in seconds,
 --
--- cooking_recipe:
+-- hardcook_recipe:
 --   new_name       -> new name after cooked,
---   cook_temp      -> cooking temperature
---   degree_energy  -> energy to cook,
---   cooked_energy  -> optimal cooking time,
+--   burnt_name     -> new name after burned,
+--   cook_temp      -> hardcook temperature
+--   degree_energy  -> energy to rise temperature,
+--   cooked_energy  -> energy to cook,
+--   burnt_energy   -> energy to burned
+--   effectivity    -> coeficient for calculate effectivity
 --   conductivity   -> thermal conductivity (include contact surface)
 --     from_cooker  -> from cooker to pot, etc.
 --     to_air       -> from pot, etc. to air
@@ -40,10 +43,10 @@ local modpath = minetest.get_modpath(minetest.get_current_modname())
 --     meta_name -> effects meta name
 --
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
-if (cooking.have_unified) then
-  cooking.inventory_dynamic_display_size = function (craft)
+if (hardcook.have_unified) then
+  hardcook.inventory_dynamic_display_size = function (craft)
     local width = 1;
     if (craft.items[2]) then
       width = 2;
@@ -51,46 +54,52 @@ if (cooking.have_unified) then
     return {width = width, height = 1};
   end
   
-  unified_inventory.register_craft_type("take_hand", {
+  unified_inventory.register_craft_type("hardcook_take_hand", {
       description = S("take");
       icon = "wieldhand.png";
       width = 2,
       height = 1,
-      dynamic_display_size = cooking.inventory_dynamic_display_size,
+      dynamic_display_size = hardcook.inventory_dynamic_display_size,
     })
-  unified_inventory.register_craft_type("place_hand", {
+  unified_inventory.register_craft_type("hardcook_place_hand", {
       description = S("place");
       icon = "wieldhand.png";
       width = 2,
       height = 1,
-      dynamic_display_size = cooking.inventory_dynamic_display_size,
+      dynamic_display_size = hardcook.inventory_dynamic_display_size,
     })
-  unified_inventory.register_craft_type("waiting", {
+  unified_inventory.register_craft_type("hardcook_waiting", {
       description = S("in some time");
-      icon = "cooking_clock.png",
+      icon = "hardcook_clock.png",
       width = 1,
       height = 1,
     })
-  unified_inventory.register_craft_type("cooking_cooker", {
-      description = S("cooking on cooker");
+  unified_inventory.register_craft_type("hardcook_cooker", {
+      description = S("hardcook on cooker");
       width = 1,
       height = 1,
     })
-  unified_inventory.register_craft_type("baking", {
+  unified_inventory.register_craft_type("hardcook_baking", {
       description = S("baking");
       width = 1,
       height = 1,
     })
+  unified_inventory.register_craft_type("hardcook_drop", {
+      description = S("drop");
+      width = 1,
+      height = 1,
+      dynamic_display_size = hardcook.inventory_dynamic_display_size,
+    })
 end
 
-cooking.recipes_on_punch = function(pos, node, puncher, pointed_thing)
+hardcook.recipes_on_punch = function(pos, node, puncher, pointed_thing)
   local node_def = minetest.registered_nodes[node.name];
   if node_def and puncher then
-    local _cooking = node_def._cooking;
-    if _cooking then
+    local _hardcook = node_def._hardcook;
+    if _hardcook then
       local wielded_item = puncher:get_wielded_item();
       local wielded_name = wielded_item:get_name();
-      local punch_recipe = cooking.check_item(wielded_name, _cooking.punch_recipes);
+      local punch_recipe = hardcook.check_item(wielded_name, _hardcook.punch_recipes);
       if punch_recipe then
         local swap_it = true;
         local take_it = true;
@@ -160,26 +169,26 @@ cooking.recipes_on_punch = function(pos, node, puncher, pointed_thing)
   return minetest.node_punch(pos, node, puncher, pointed_thing);
 end
 
-cooking.recipes_on_construct = function(pos)
+hardcook.recipes_on_construct = function(pos)
   local node = minetest.get_node(pos);
   local node_def = minetest.registered_nodes[node.name];
   
-  if node_def._cooking then
+  if node_def._hardcook then
     local meta = minetest.get_meta(pos);
     meta:set_string("infotext", node_def.description);
-    if node_def._cooking.timer_recipe then
+    if node_def._hardcook.timer_recipe then
       local timer = minetest.get_node_timer(pos);
       timer:start(1)
     end
   end
 end
-cooking.recipes_on_timer = function(pos, elapsed)
+hardcook.recipes_on_timer = function(pos, elapsed)
   local node = minetest.get_node(pos);
   local node_def = minetest.registered_nodes[node.name];
   if node_def then
-    local _cooking = node_def._cooking;
-    if _cooking then
-      local timer_recipe = _cooking.timer_recipe;
+    local _hardcook = node_def._hardcook;
+    if _hardcook then
+      local timer_recipe = _hardcook.timer_recipe;
       if timer_recipe then
         local meta = minetest.get_meta(pos);
         local value = meta:get_int(timer_recipe.use_meta) or 0;
@@ -199,18 +208,19 @@ cooking.recipes_on_timer = function(pos, elapsed)
   end
   return false;
 end
-if (cooking.easy_mode) then
-  dofile(modpath.."/recipes/easy.lua");
-else
-  dofile(modpath.."/recipes/hard.lua");
-end
+dofile(modpath.."/recipes/easy.lua"); -- change name
+dofile(modpath.."/recipes/functions.lua");
+dofile(modpath.."/recipes/callbacks.lua");
 
 dofile(modpath.."/recipes/dishes.lua");
+dofile(modpath.."/recipes/skillet.lua");
 
 dofile(modpath.."/recipes/bread.lua");
+dofile(modpath.."/recipes/bibimbap.lua");
 dofile(modpath.."/recipes/cutting.lua");
 dofile(modpath.."/recipes/flour.lua");
 dofile(modpath.."/recipes/juices.lua");
 dofile(modpath.."/recipes/sourdough.lua");
 dofile(modpath.."/recipes/soup.lua");
+dofile(modpath.."/recipes/pie.lua");
 

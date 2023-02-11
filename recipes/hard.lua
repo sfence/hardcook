@@ -1,5 +1,5 @@
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
 minetest.log("warning", "TODO:")
 

@@ -58,9 +58,9 @@ local node_box_fill =
     },
   }
 
-local S = cooking.translator;
+local S = hardcook.translator;
 
-minetest.register_node( "cooking:cup", {
+minetest.register_node( "hardcook:cup", {
   description = S("Empty cup"),
   drawtype = "nodebox",
   paramtype  = "light",
@@ -68,12 +68,13 @@ minetest.register_node( "cooking:cup", {
   node_box = node_box,
   selection_box = node_box,
   collision_box = node_box,
-  tiles = {"cooking_cup.png"},
+  tiles = {"hardcook_cup.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2},
 })
 
-minetest.register_node( "cooking:cup_tea", {
+minetest.register_node( "hardcook:cup_tea", {
   description = S("Cup of tea"),
   stack_max = 1,
   drawtype = "nodebox",
@@ -82,7 +83,8 @@ minetest.register_node( "cooking:cup_tea", {
   node_box = node_box_fill,
   selection_box = node_box_fill,
   collision_box = node_box_fill,
-  tiles = {"cooking_cup_tea.png", "cooking_cup.png", "cooking_cup.png", "cooking_cup.png", "cooking_cup.png", "cooking_cup.png"},
+  tiles = {"hardcook_cup_tea.png", "hardcook_cup.png", "hardcook_cup.png", "hardcook_cup.png", "hardcook_cup.png", "hardcook_cup.png"},
+  use_texture_alpha = "clip",
   --sunlight_propagates = true,
   groups = {oddly_breakable_by_hand = 1, dig_immediate = 2},
 })

@@ -1,6 +1,8 @@
 
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
+dofile(modpath.."/dishes/functions.lua");
+
 dofile(modpath.."/dishes/baking_sheet.lua");
 dofile(modpath.."/dishes/baking_tray.lua");
 dofile(modpath.."/dishes/cake_pan.lua");
